@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Schedule Your Appointment - BreastCare</title>
+  <style>
+    /* Basic reset */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0; padding: 0;
+      background: #f9f9f9;
+      color: #333;
+    }
+    a {
+      color: #d6336c;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Navbar */
+    nav {
+      background: #d6336c;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    nav .logo h1 {
+      margin: 0;
+      font-weight: 700;
+      font-size: 1.5rem;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+      margin: 0;
+      padding: 0;
+    }
+    nav ul li a {
+      color: white;
+      font-weight: 600;
+    }
+    nav ul li a.active,
+    nav ul li a:hover {
+      text-decoration: underline;
+    }
+    nav .donate-btn {
+      background: white;
+      color: #d6336c;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+    nav .donate-btn:hover {
+      background: #f0a6c6;
+      color: white;
+    }
+
+    /* Page container for two column layout */
+    .container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    /* Left side (main content) */
+    .left-column {
+      flex: 2;
+      min-width: 320px;
+    }
+    /* Right side (sidebar info boxes) */
+    .right-column {
+      flex: 1;
+      min-width: 280px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    /* Section title */
+    h2, h3 {
+      color: #d6336c;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Doctor cards */
+    .doctors {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .doctor-card {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(214,51,108,0.2);
+      padding: 1rem;
+      flex: 1 1 300px;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+    .doctor-card img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #d6336c;
+    }
+    .doctor-info h4 {
+      margin: 0 0 0.3rem 0;
+      color: #b52455;
+    }
+    .doctor-info p {
+      margin: 2px 0;
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    /* Appointment form styling */
+    .appointment-form {
+      background: white;
+      padding: 1.5rem;
+      margin-top: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(214,51,108,0.2);
+    }
+    .appointment-form form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .appointment-form label {
+      font-weight: 600;
+      color: #b52455;
+    }
+    .appointment-form input,
+    .appointment-form select,
+    .appointment-form textarea {
+      padding: 0.5rem;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      resize: vertical;
+    }
+    .appointment-form textarea {
+      min-height: 80px;
+    }
+    .appointment-form button {
+      background: #d6336c;
+      color: white;
+      border: none;
+      padding: 0.75rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .appointment-form button:hover {
+      background: #b52455;
+    }
+
+    /* Right side boxes */
+    .info-box {
+      background: white;
+      border-radius: 8px;
+      padding: 1rem 1.5rem;
+      box-shadow: 0 2px 8px rgba(214,51,108,0.15);
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+    .info-box h3 {
+      margin-top: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 700;
+    }
+    .info-box p, .info-box ul {
+      margin-top: 0.5rem;
+      margin-left: 1.2rem;
+    }
+    .info-box ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .info-box ul li {
+      margin-bottom: 0.5rem;
+      position: relative;
+      padding-left: 1.5rem;
+    }
+    /* Emoji bullet */
+    .info-box ul li::before {
+      content: "✔️";
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    /* Contact info emojis */
+    .contact-info p {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 0.3rem 0;
+    }
+    .contact-info p::before {
+      content: "📞";
+      font-size: 1.2rem;
+    }
+    .contact-info p.email::before {
+      content: "✉️";
+    }
+    .contact-info p.address::before {
+      content: "🏥";
+    }
+
+    /* Need help emoji */
+    .help p.call-support {
+      font-weight: 600;
+      color: #d6336c;
+    }
+    .help a {
+      display: inline-block;
+      background: #d6336c;
+      color: white;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      margin: 0.5rem 0;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .help a:hover {
+      background: #b52455;
+    }
+    .help p.hotline::before {
+      content: "☎️ ";
+      font-weight: 700;
+      color: #d6336c;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .container {
+        flex-direction: column;
+      }
+      .doctor-card {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .doctor-card img {
+        margin-bottom: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">
+      <h1>BreastCare</h1>
+    </div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Breast Cancer</a></li>
+      <li><a href="schedule.html" class="active">Your Schedule</a></li>
+      <li><a href="education.html">Educational Hub</a></li>
+      <li><a href="living.html">Living with Breast Cancer</a></li>
+      <li><a href="prevention.html">Prevention & Screening</a></li>
+      <li><a href="treatment.html">Treatment Options</a></li>
+      <li><a href="resources.html">Resources & Support</a></li>
+      <li><a href="research.html">Research & Innovation</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+      <li><a href="donate.html" class="donate-btn">Donate</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <!-- Left Column -->
+    <div class="left-column">
+      <section class="doctors">
+        <h2>Select Your Doctor</h2>
+        <div class="doctor-card">
+          <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Dr. Sarah Smith" />
+          <div class="doctor-info">
+            <h4>Dr. Sarah Smith</h4>
+            <p>Breast Oncologist</p>
+            <p>15 years experience ⭐ 4.9</p>
+            <p>Available: Monday, Wednesday, Friday</p>
+          </div>
+        </div>
+        <div class="doctor-card">
+          <img src="https://randomuser.me/api/portraits/men/43.jpg" alt="Dr. Michael Johnson" />
+          <div class="doctor-info">
+            <h4>Dr. Michael Johnson</h4>
+            <p>Radiologist</p>
+            <p>12 years experience ⭐ 4.8</p>
+            <p>Available: Tuesday, Thursday, Saturday</p>
+          </div>
+        </div>
+        <div class="doctor-card">
+          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Dr. Emily Williams" />
+          <div class="doctor-info">
+            <h4>Dr. Emily Williams</h4>
+            <p>Breast Surgeon</p>
+            <p>18 years experience ⭐ 4.9</p>
+            <p>Available: Monday, Tuesday, Friday</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="appointment-form">
+        <h2>Appointment Details</h2>
+        <form action="#" method="POST">
+          <label for="appointment-type">Select appointment type</label>
+          <select id="appointment-type" name="appointment-type" required>
+            <option value="" disabled selected>--Select--</option>
+            <option value="screening">Screening</option>
+            <option value="consultation">Consultation</option>
+          </select>
+
+          <label for="date">Select Date</label>
+          <input type="date" id="date" name="date" required />
+
+          <label for="time">Select preferred time</label>
+          <input type="time" id="time" name="time" required />
+
+          <label for="fname">First Name</label>
+          <input type="text" id="fname" name="fname" required />
+
+          <label for="lname">Last Name</label>
+          <input type="text" id="lname" name="lname" required />
+
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required />
+
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" required />
+
+          <label for="concerns">Any specific concerns or information you'd like to share</label>
+          <textarea id="concerns" name="concerns"></textarea>
+
+          <button type="submit">Book Appointment</button>
+        </form>
+      </section>
+    </div>
+
+    <!-- Right Column -->
+    <div class="right-column">
+      <section class="info-box why-schedule">
+        <h3>📅 Why Schedule Regular Screenings?</h3>
+        <ul>
+          <li>Early detection saves lives - 99% survival rate when caught early</li>
+          <li>Mammograms can detect cancer 2 years before you can feel it</li>
+          <li>Regular screenings reduce death risk by 20-40%</li>
+        </ul>
+      </section>
+
+      <section class="info-box contact-info">
+        <h3>📞 Contact Information</h3>
+        <p>(555) 123-4567</p>
+        <p class="email">appointments@breastcare.com</p>
+        <p class="address">123 Healthcare Center Dr, Medical District, CA 90210</p>
+      </section>
+
+      <section class="info-box help">
+        <h3>❓ Need Help?</h3>
+        <p>Our patient coordinators are here to help you schedule and prepare for your appointment.</p>
+        <a href="tel:+18002272345">Call Support</a>
+        <p class="hotline">24/7 Crisis Support Hotline: 1-800-227-2345 (Free & Confidential)</p>
+      </section>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Educational Hub - BreastCare</title>
+  <style>
+    /* Reset & Base styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background: #fff0f5;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 8px;
+      color: #d6336c;
+      text-align: center;
+    }
+
+    p {
+      margin-bottom: 20px;
+      font-size: 1.1rem;
+      text-align: center;
+    }
+
+    /* Tabs styles */
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 30px;
+    }
+
+    .tab-btn {
+      background: #ffe6f0;
+      border: none;
+      padding: 12px 20px;
+      cursor: pointer;
+      border-radius: 8px;
+      font-weight: 600;
+      color: #d6336c;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      flex: 1 1 150px;
+      max-width: 200px;
+      box-shadow: 0 2px 6px rgba(214, 51, 108, 0.2);
+    }
+
+    .tab-btn:hover {
+      background: #ffbfd3;
+    }
+
+    .tab-btn.active {
+      background: #d6336c;
+      color: #fff;
+      box-shadow: 0 4px 10px rgba(214, 51, 108, 0.4);
+    }
+
+    /* Tab content styles */
+    .tab-content {
+      background: #fff;
+      border-radius: 10px;
+      padding: 25px;
+      box-shadow: 0 4px 15px rgba(214, 51, 108, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    [hidden] {
+      display: none;
+    }
+
+    /* Item cards */
+    .item-card {
+      background: #fff0f5;
+      border: 1px solid #f2b8cd;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: inset 0 0 6px #f9d6e4;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .item-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 20px rgba(214, 51, 108, 0.3);
+    }
+
+    .item-card h4 {
+      margin-bottom: 8px;
+      color: #b02a56;
+      font-size: 1.25rem;
+    }
+
+    .item-card p {
+      margin: 4px 0;
+      font-size: 1rem;
+      color: #6e2c4b;
+    }
+
+    .item-card a {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 8px 12px;
+      background-color: #d6336c;
+      color: #fff;
+      border-radius: 6px;
+      font-weight: 600;
+      transition: background 0.3s;
+      font-size: 0.95rem;
+    }
+
+    .item-card a:hover {
+      background-color: #b02a56;
+    }
+
+    /* Stay Informed / Newsletter */
+    .newsletter {
+      margin-top: 50px;
+      background: #fff;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 4px 20px rgba(214, 51, 108, 0.2);
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .newsletter h3 {
+      margin-bottom: 12px;
+      color: #d6336c;
+      text-align: center;
+      font-size: 1.5rem;
+    }
+
+    .newsletter p {
+      margin-bottom: 20px;
+      font-size: 1.1rem;
+      line-height: 1.4;
+      text-align: center;
+    }
+
+    .subscribe-form {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .subscribe-form input[type="email"] {
+      flex: 1;
+      padding: 12px 15px;
+      border: 2px solid #d6336c;
+      border-radius: 8px;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+    .subscribe-form input[type="email"]:focus {
+      border-color: #b02a56;
+    }
+
+    .subscribe-form button {
+      padding: 12px 20px;
+      background-color: #d6336c;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.3s;
+    }
+
+    .subscribe-form button:hover {
+      background-color: #b02a56;
+    }
+
+    /* Footer styles */
+    footer {
+      margin-top: 50px;
+      padding: 20px 0;
+      background: #f0f0f0;
+      text-align: center;
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    /* Responsive adjustments */
+    @media(max-width: 600px) {
+      .tabs {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .tab-btn {
+        max-width: 100%;
+      }
+      .newsletter {
+        padding: 20px;
+      }
+      .subscribe-form {
+        flex-direction: column;
+      }
+      .subscribe-form input[type="email"] {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Educational Hub</h2>
+    <p>Comprehensive resources, articles, videos, and tools to help you stay informed about breast health and cancer prevention.</p>
+
+    <div class="tabs" role="tablist" aria-label="Educational Hub Tabs">
+      <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="tab-articles" id="tab-btn-articles">Articles</button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-videos" id="tab-btn-videos">Videos</button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-resources" id="tab-btn-resources">Resources</button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-selfcare" id="tab-btn-selfcare">Self-Care</button>
+    </div>
+
+    <div id="tab-articles" class="tab-content" role="tabpanel" aria-labelledby="tab-btn-articles">
+      <div class="item-card">
+        <h4>How to Perform a Breast Self-Exam</h4>
+        <p>Step-by-step guide to monthly self-examinations</p>
+        <p>5 min read</p>
+        <a href="self-exam.html">Read More</a>
+      </div>
+      <div class="item-card">
+        <h4>Breast Cancer Myths vs Facts</h4>
+        <p>Debunking common misconceptions about breast cancer</p>
+        <p>8 min read</p>
+        <a href="myths-facts.html">Read More</a>
+      </div>
+      <div class="item-card">
+        <h4>Understanding Your Mammogram Results</h4>
+        <p>What BI-RADS categories mean for your health</p>
+        <p>6 min read</p>
+        <a href="screening.html">Read More</a>
+      </div>
+      <div class="item-card">
+        <h4>Nutrition and Breast Health</h4>
+        <p>Foods that may help reduce breast cancer risk</p>
+        <p>10 min read</p>
+        <a href="lifestyle.html">Read More</a>
+      </div>
+    </div>
+
+    <div id="tab-videos" class="tab-content" role="tabpanel" aria-labelledby="tab-btn-videos" hidden>
+      <div class="item-card">
+        <h4>Breast Self-Exam Demonstration</h4>
+        <p>A step-by-step video guide</p>
+        <a href="videos/self-exam-demo.mp4" target="_blank" rel="noopener">Watch Video</a>
+      </div>
+      <div class="item-card">
+        <h4>Understanding Mammograms</h4>
+        <p>Expert radiologist explains the procedure</p>
+        <a href="videos/mammogram-explained.mp4" target="_blank" rel="noopener">Watch Video</a>
+      </div>
+      <div class="item-card">
+        <h4>Nutrition Tips for Breast Health</h4>
+        <p>Dietitian advice on cancer prevention</p>
+        <a href="videos/nutrition-tips.mp4" target="_blank" rel="noopener">Watch Video</a>
+      </div>
+    </div>
+
+    <div id="tab-resources" class="tab-content" role="tabpanel" aria-labelledby="tab-btn-resources" hidden>
+      <div class="item-card">
+        <h4>Self-Exam Guide PDF</h4>
+        <p>Downloadable instructions for monthly self-checks</p>
+        <a href="resources/self-exam-guide.pdf" target="_blank" rel="noopener">Download</a>
+      </div>
+      <div class="item-card">
+        <h4>Screening Guidelines</h4>
+        <p>Recommended screening schedules for different ages</p>
+        <a href="resources/screening-guidelines.pdf" target="_blank" rel="noopener">Download</a>
+      </div>
+      <div class="item-card">
+        <h4>Support Groups Directory</h4>
+        <p>Find local and online support groups</p>
+        <a href="support.html">Visit Page</a>
+      </div>
+    </div>
+
+    <div id="tab-selfcare" class="tab-content" role="tabpanel" aria-labelledby="tab-btn-selfcare" hidden>
+      <div class="item-card">
+        <h4>Managing Stress</h4>
+        <p>Techniques and tips for reducing anxiety</p>
+        <a href="selfcare/stress-management.html">Learn More</a>
+      </div>
+      <div class="item-card">
+        <h4>Nutrition & Exercise</h4>
+        <p>How lifestyle affects breast health</p>
+        <a href="selfcare/nutrition-exercise.html">Learn More</a>
+      </div>
+      <div class="item-card">
+        <h4>Emotional Support</h4>
+        <p>Accessing counseling and peer support</p>
+        <a href="selfcare/emotional-support.html">Learn More</a>
+      </div>
+    </div>
+
+    <section class="newsletter" aria-label="Newsletter subscription">
+      <h3>Stay Informed</h3>
+      <p>Get the latest research updates, educational content, and awareness reminders delivered to your inbox monthly.</p>
+      <form class="subscribe-form" action="#" method="POST">
+        <input type="email" placeholder="Enter your email" required aria-label="Email address" />
+        <button type="submit">Subscribe</button>
+      </form>
+    </section>
+  </div>
+
+  <script>
+    // Tab switching script
+    const tabs = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => {
+        // deactivate all
+        tabs.forEach(t => {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        // hide all
+        tabContents.forEach(c => c.hidden = true);
+        // activate clicked
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+        tab.setAttribute('aria-expanded', 'true');
+        // show corresponding content
+        tabContents[index].hidden = false;
+      });
+    });
+  </script>
+</body>
+</html>
